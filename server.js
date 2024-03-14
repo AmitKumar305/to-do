@@ -9,7 +9,10 @@ require('./db/index');
 app.use(express.json());
 app.use(busboyBodyParser());
 app.use(cors({
-    origin: '*',
+	origin: '*',
+	methods: ['GET', 'POST'],
+	allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'X-HTTP-Method-Override', 'Accept'],
+	credentials: true,
 }));
 
 const PORT = process.env.PORT || 3000;
