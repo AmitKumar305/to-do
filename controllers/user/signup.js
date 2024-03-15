@@ -1,5 +1,6 @@
 const UserModel = require('../../models/user.models');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 const uploadOnCloudinary = require('../../services/cloduinary.service');
 
 async function UserSignup(req, res) {
@@ -32,9 +33,22 @@ async function UserSignup(req, res) {
         });
         await user.save();
 
+        const jwtToken = await jwt.sign({
+            id: user._id,
+            email: user.email,
+        }, process.env.SECRET_STRING, {
+            expiresIn: '100d',
+        });
+
         res.status(200).json({
             message: 'User signed up successfully',
-            data: user,
+            data: {
+                token: jwtToken,
+                _id: user._id,
+                name: user.name,
+                email: user.email,
+                profilePicture: user.profilePicture,
+            },
         })
     } catch (err) {
         res.status(500).json({
