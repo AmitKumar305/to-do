@@ -7,7 +7,7 @@ async function UserSignup(req, res) {
         const { name, email, password } = req.body;
 
         if (!name || !email || !password) {
-            return res.status(401).json({
+            return res.status(400).json({
                 message: 'Missing required fields',
             })
         }
@@ -16,7 +16,7 @@ async function UserSignup(req, res) {
             email,
         });
         if (existingEmail) {
-            return res.status(401).json({
+            return res.status(400).json({
                 message: 'Email already exists'
             });
         }
