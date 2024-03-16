@@ -43,7 +43,7 @@ async function UserSignup(req, res) {
         res.status(200).json({
             message: 'User signed up successfully',
             data: {
-                token: jwtToken,
+                accessToken: jwtToken,
                 _id: user._id,
                 name: user.name,
                 email: user.email,
