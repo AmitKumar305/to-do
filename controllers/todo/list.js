@@ -34,7 +34,7 @@ async function TodoList(req, res) {
             data: todos,
         })
     } catch (err) {
-        console.log(err``);
+        console.log(err);
         res.status(500).json({
             message: 'Error while fetching todo'
         })
